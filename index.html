@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link">
     <script>
-        // Extract user_id from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('user_id');
+        // Function to extract everything after the '=' sign in the URL
+        function getUserIdFromUrl() {
+            const url = window.location.href;
+            const userId = url.split('=')[1];
+            return userId;
+        }
 
-        // Send data to Google Apps Script Web App
-        fetch('https://script.google.com/macros/s/AKfycbxqakjnS6BsFaWYaHMIguA5FzWSqCzeOaEkNN6L_s8Yachr5xC1XH1ombA9459vt_69/exec', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                user_id: userId
+        // Get the user_id from the URL
+        const userId = getUserIdFromUrl();
+
+        if (userId) {
+            // Send the user_id to Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbxqakjnS6BsFaWYaHMIguA5FzWSqCzeOaEkNN6L_s8Yachr5xC1XH1ombA9459vt_69/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: userId
+                })
             })
-        })
-        .then(response => response.text())
-        .then(data => console.log('Success:', data))
-        .catch(error => console.error('Error:', error));
+            .then(response => response.text())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        } else {
+            console.error('No user_id found in the URL');
+        }
     </script>
     <title>Redirecting...</title>
 </head>
