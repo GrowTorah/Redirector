@@ -5,26 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link">
     <script>
-        // Function to extract everything after the '=' sign in the URL
-        function getUserIdFromUrl() {
-            const url = window.location.href;
-            const userId = url.split('=')[1];
-            return userId;
-        }
-
-        // Get the user_id from the URL
-        const userId = getUserIdFromUrl();
+        // Extract the user_id directly from the URL
+        const url = window.location.href;
+        const userId = url.split('=')[1];  // Extract everything after '='
 
         if (userId) {
-            // Send the user_id to Google Apps Script Web App
-            fetch('https://script.google.com/macros/s/AKfycbwGIR28HqJcFkk5eOFeZ1jb9ImzVJirGN4IuZA5uKs5TojL8LhiKLvGcOFyzp5vWTJA/exec', {
+            // Create an object with the user_id and timestamp
+            const data = {
+                user_id: userId,
+                timestamp: new Date().toISOString()  // Add a timestamp
+            };
+
+            // Send the data to the Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbxqakjnS6BsFaWYaHMIguA5FzWSqCzeOaEkNN6L_s8Yachr5xC1XH1ombA9459vt_69/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    user_id: userId
-                })
+                body: JSON.stringify(data)
             })
             .then(response => response.text())
             .then(data => console.log('Success:', data))
