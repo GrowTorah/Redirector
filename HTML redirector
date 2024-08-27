@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=https://drive.google.com/file/d/1ABCXYZ12345/view">
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('user_id');
+
+        fetch('https://hooks.zapier.com/hooks/catch/your_webhook_id/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                timestamp: new Date().toISOString()
+            })
+        });
+    </script>
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>Redirecting you to the file...</p>
+</body>
+</html>
