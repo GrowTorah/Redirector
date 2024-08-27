@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://drive.google.com/file/d/1ABCXYZ12345/view">
+    <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link">
     <script>
+        // Extract user_id from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('user_id');
 
-        fetch('https://hooks.zapier.com/hooks/catch/your_webhook_id/', {
+        // Send data to Zapier webhook
+        fetch('https://hooks.zapier.com/hooks/catch/18218493/2tytejh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
