@@ -9,8 +9,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('user_id');
 
-        // Send data to Zapier webhook
-        fetch('https://hooks.zapier.com/hooks/catch/18218493/2tytejh/', {
+        // Send data to Google Apps Script Web App
+        fetch('https://script.google.com/macros/s/AKfycbzhmrYrPH_c3z_yxAzzYI5U-egChIKkeE2xvtQvJFdkm5rqU7rhBajrdLYpdCfqKnth/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
