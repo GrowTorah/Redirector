@@ -9,28 +9,19 @@
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('user_id');
 
-        // Airtable API details
-        const airtableToken = 'patCZUABAMMleJN8o.2d568b161fad1b0cf714c6981859392d1255823f267dca50a23d247d6d338629';
-        const baseId = 'appqtc2GrFHsAxjC3';
-        const tableId = 'tblBpObjRdZStAuDn';
-
-        // Send data to Airtable
-        fetch(`https://api.airtable.com/v0/${baseId}/${tableId}`, {
+        // Send data to Google Apps Script Web App
+        fetch('https://script.google.com/macros/s/AKfycbxUU_M0MS_9vW79d5P6uHfk5u9WTPIRpCM3N-afBekrPLwcjohTKgHH8ypVVG6reHSj/exec', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${airtableToken}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                fields: {
-                    "User ID": userId,
-                    "Timestamp": new Date().toISOString()
-                }
+                user_id: userId
             })
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => console.log('Success:', data))
-        .catch((error) => console.error('Error:', error));
+        .catch(error => console.error('Error:', error));
     </script>
     <title>Redirecting...</title>
 </head>
