@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link">
     <script>
-        // Extract the user_id directly from the URL
-        const url = window.location.href;
-        const userId = url.split('=')[1];  // Extract everything after '='
+        // Extract parameters from the URL
+        const urlParams = new URLSearchParams(window.location.href);
+        const userId = urlParams.get('user_id');  // Example of extracting 'user_id' from URL
 
         if (userId) {
-            // Create an object with the user_id and timestamp
+            // Prepare data to send to Zapier webhook
             const data = {
                 user_id: userId,
-                timestamp: new Date().toISOString()  // Add a timestamp
+                timestamp: new Date().toISOString()  // Add timestamp
             };
 
-            // Send the data to the Google Apps Script Web App
-            fetch('https://script.google.com/macros/s/AKfycbwGIR28HqJcFkk5eOFeZ1jb9ImzVJirGN4IuZA5uKs5TojL8LhiKLvGcOFyzp5vWTJA/exec', {
+            // Send the data to Zapier webhook
+            fetch('https://hooks.zapier.com/hooks/catch/18218493/2tytejh/', {  // Replace with your actual Zapier Webhook URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
