@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link">
     <script>
-        // Extract parameters from the URL
+        // Extract the user_id directly from the URL using URLSearchParams
         const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('user_id');  // Example of extracting 'user_id' from URL
+        const userId = urlParams.get('user_id');  // Get the value of 'user_id' parameter
 
         if (userId) {
-            // Prepare data to send to Zapier webhook
+            // Create an object with the user_id and timestamp
             const data = {
                 user_id: userId,
-                timestamp: new Date().toISOString()  // Add timestamp
+                timestamp: new Date().toISOString()  // Add a timestamp
             };
 
-            // Send the data to Zapier webhook
+            // Send the data to the Zapier Webhook URL
             fetch('https://hooks.zapier.com/hooks/catch/18218493/2tytejh/', {  // Replace with your actual Zapier Webhook URL
                 method: 'POST',
                 headers: {
@@ -24,15 +25,8 @@
                 body: JSON.stringify(data)
             })
             .then(response => response.text())
-            .then(data => {
-                console.log('Success:', data);
-                // Redirect to the Google Drive folder after successful submission
-                window.location.href = "https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link";
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Optional: Handle the error or redirect regardless
-            });
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
         } else {
             console.error('No user_id found in the URL');
         }
