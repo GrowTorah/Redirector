@@ -24,8 +24,15 @@
                 body: JSON.stringify(data)
             })
             .then(response => response.text())
-            .then(data => console.log('Success:', data))
-            .catch(error => console.error('Error:', error));
+            .then(data => {
+                console.log('Success:', data);
+                // Redirect to the Google Drive link after successful submission
+                window.location.href = "https://drive.google.com/drive/folders/1-0V4V4_RqOjwFlZB98o6yzhuTE92tblN?usp=drive_link";  // Replace with your actual Google Drive link
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Optionally, you could redirect even if there's an error, or handle it differently
+            });
         } else {
             console.error('No user_id found in the URL');
         }
